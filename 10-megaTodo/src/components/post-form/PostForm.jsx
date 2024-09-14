@@ -17,7 +17,10 @@ function PostForm({post}) {
   const navigate = useNavigate()
   const userData= useSelector(state=> state.auth.userData)
   const submit = async(data)=>{
+    console.table(data);
     if(post){
+      console.log("In edit");
+      
       const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
       if(file) {
         appwriteService.deleteFile(post.featuredImage)
@@ -30,6 +33,7 @@ function PostForm({post}) {
         navigate(`/post/${dbPost.$id}`)
       }
     }else{
+      console.log("In add");
       const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : undefined;
       if(file) {
         const fileId = file.$id;
