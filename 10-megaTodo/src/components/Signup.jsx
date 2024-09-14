@@ -14,10 +14,12 @@ function Signup() {
     const create = async(data)=>{
         setError("")
         try {
-            const userdata = await authService.createAccount(data)
+            const userData = await authService.createAccount(data)
             if(userData) {
                 const userData = await authService.getCurrentUser();
-                if(userData) useDispatch(login(userData))
+                if(userData) {
+                    useDispatch(login(userData))
+                }
                 navigate('/')
             }
         } catch (error) {
@@ -68,7 +70,7 @@ function Signup() {
                     type="password"
                     placeholder="Please enter your password"
                     label="Password: "
-                    {...required("password", {
+                    {...register("password", {
                         required:true
                     })}
                     />
